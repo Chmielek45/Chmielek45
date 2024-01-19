@@ -1,5 +1,6 @@
 ### Hi there 👋
-([Chmielek45.github.io](https://chmielek45.github.io/))
+My website: ([Chmielek45.github.io](https://chmielek45.github.io/))
+Repo about autonomous cars: (
 
 - 🔭 I’m currently working on ...
 - 🌱 I’m currently learning ...

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+#include <string.h>
 
 #define N 16
 
@@ -47,7 +49,7 @@ void heapify(int heap[],int k,int size){
         int right = k*2 + 2;
         int pom;
         if ( right < size ){    
-            if ( heap[k] < max(heap[left],heap[right])){
+            if ( heap[k] < heap[left] || heap[k] < heap[right]){
                 if ( heap[left] >= heap[right] ){
                     pom = heap[left];
                     heap[left] = heap[k];
@@ -75,27 +77,22 @@ void heapify(int heap[],int k,int size){
 
 }
 
-void heapSort(int heap[], int sorted[], int size){
+void heapSort(int heap[], int sorted[], int size, int track){
     int i,j;
     heapify(heap,(size-1)/2, size);
-    
-    printf("\nafter first heapify :\n");
-    for ( j = 0 ; j < size ; j++){
-            printf("%d, ",heap[j]);
-        }
-    
+
     // ------------------------------------//
-    
-    print__header(size);
-    
+    if (track == 1){
+        print__header(size);
+    }
     // ------------------------------------//
     
     for ( i = 0 ; i < size + 1 ; i++){
        
         // ------ print ---------//
-        
-        print__heap__sorted(i,size,heap,sorted);
-        
+        if(track == 1){
+            print__heap__sorted(i,size,heap,sorted);
+        }
         // ------- end ---------- //
         
         if ( i < size ){
@@ -108,22 +105,36 @@ void heapSort(int heap[], int sorted[], int size){
     
 }
 
-int main(){
+int main(int argc, char *argv[]){
     int heap[N];
     int sorted[N];
     int i,size;
+    int track = 0;
+    //printf("argc = %d\n",argc);
+    // sprawdzenie argumentów wywołania
+    
+    for ( i = 0 ; i < argc ; i++){
+        if ( strcmp(argv[i], "--track") == 0 ){
+            track = 1;
+            //printf("track = 1\n");
+        }
+        else{
+            //printf("track = 0\n");
+        }
+    }
+    printf("Wylosowana tablica wygląda następująco:\n");
     srand(time(NULL));
     for ( i = 0 ; i < N ; i++ ){
         heap[i] = (rand() % 21) - 10 ;
         //sorted[i] = 999;
         printf("%d, ",heap[i]);
     }
-    heapSort(heap, sorted, N);
+    heapSort(heap, sorted, N, track);
     printf("\n\n----------------\n\nPosortowana tablica wygląda następująco:\n");
     for ( i = 0 ; i < N ; i++){
         printf("%d, ",sorted[i]);
     }
-    
+    printf("\n--------------------------------\n");
     return 0;
 
 }

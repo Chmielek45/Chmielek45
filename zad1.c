@@ -23,6 +23,24 @@ void print__header(int size){
 
 }
 
+void print__heap__sorted(int i, int size, int heap[], int sorted[]){
+    int j;
+    for ( j = 0 ; j < size-i ; j++){
+        printf("%2d ",heap[j]);
+    }
+    for ( j = 0 ; j < i ; j++){
+        printf("   ");
+    }
+    printf("  ||  ");
+    for ( j = 0 ; j < size - i ; j++){
+        printf("   ");
+    }
+    for ( j = 0 ; j < i ; j++){
+        printf("%2d ",sorted[j]);
+    }
+    printf("\n");
+}
+
 void heapify(int heap[],int k,int size){
     if ( k < size && k >= 0){
         int left = k*2 + 1;
@@ -70,41 +88,13 @@ void heapSort(int heap[], int sorted[], int size){
     
     print__header(size);
     
-    /*printf("\n");
-    for ( i = 0 ; i < size*2; i++){
-        printf(" ");
-    }
-    printf("heap  ");
-    for ( i = 0 ; i < size*2; i++){
-        printf(" ");
-    }
-    printf("sorted");
-    printf("\n");
-    for ( i = 0 ; i < size*6 + 6 ; i++){
-        printf("-");
-    }
-    printf("\n");*/
-    
     // ------------------------------------//
     
     for ( i = 0 ; i < size + 1 ; i++){
        
         // ------ print ---------//
         
-        for ( j = 0 ; j < size-i ; j++){
-            printf("%2d ",heap[j]);
-        }
-        for ( j = 0 ; j < i ; j++){
-            printf("   ");
-        }
-        printf("  ||  ");
-        for ( j = 0 ; j < size - i ; j++){
-            printf("   ");
-        }
-        for ( j = 0 ; j < i ; j++){
-            printf("%2d ",sorted[j]);
-        }
-        printf("\n");
+        print__heap__sorted(i,size,heap,sorted);
         
         // ------- end ---------- //
         
